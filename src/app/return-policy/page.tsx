@@ -24,7 +24,7 @@ export default function ReturnPolicyPage() {
             <li>Produkti duhet të jetë i papërdorur, me etiketa dhe paketim origjinal.</li>
             <li>Kthimet pranohen brenda 7 ditëve nga data e marrjes.</li>
             <li>Produktet në shitje finale (me zbritje të madhe) mund të mos pranohen për kthim.</li>
-            <li>Kontaktoni në info@donacenter.com përpara se të ktheni një produkt.</li>
+            <li>Kontaktoni në donacenter16@gmail.com përpara se të ktheni një produkt.</li>
           </ul>
         </section>
 

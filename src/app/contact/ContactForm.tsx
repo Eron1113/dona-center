@@ -12,7 +12,7 @@ export function ContactForm() {
     const body = encodeURIComponent(
       `Emri: ${fd.get("name")}\nEmail: ${fd.get("email")}\n\n${fd.get("message")}`
     )
-    window.location.href = `mailto:info@donacenter.com?subject=${subject}&body=${body}`
+    window.location.href = `mailto:donacenter16@gmail.com?subject=${subject}&body=${body}`
     e.currentTarget.reset()
   }
 

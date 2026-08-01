@@ -71,14 +71,14 @@ export default function PrivacyPolicyPage() {
             <li>Të ankoheni te autoriteti përkatës për mbrojtjen e të dhënave.</li>
           </ul>
           <p className="mt-3">
-            Për të ushtruar këto të drejta, na kontaktoni në info@donacenter.com.
+            Për të ushtruar këto të drejta, na kontaktoni në donacenter16@gmail.com.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">Kontakt</h2>
           <p>
-            Për çdo pyetje në lidhje me privatësinë, na kontaktoni në info@donacenter.com.
+            Për çdo pyetje në lidhje me privatësinë, na kontaktoni në donacenter16@gmail.com.
           </p>
         </section>
       </div>

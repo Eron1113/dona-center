@@ -85,15 +85,15 @@ export default function Footer() {
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3 text-sm text-white/70">
                 <MapPin size={16} className="shrink-0" />
-                <span>Kosovë</span>
+                <span>Shtime, Rruga Tahir Sinani</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-white/70">
                 <Phone size={16} className="shrink-0" />
-                <span>+383 44 000 000</span>
+                <span>048 881 400</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-white/70">
                 <Mail size={16} className="shrink-0" />
-                <span>info@donacenter.com</span>
+                <span>donacenter16@gmail.com</span>
               </div>
             </div>
             <div className="flex gap-3 mt-6">

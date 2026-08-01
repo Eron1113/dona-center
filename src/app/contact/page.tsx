@@ -20,9 +20,10 @@ export default function ContactPage() {
         {/* Contact info */}
         <div className="space-y-4">
           {[
-            { icon: Phone, title: "Telefoni", value: "+383 44 000 000", href: "tel:+38344000000" },
-            { icon: Mail, title: "Email", value: "info@donacenter.com", href: "mailto:info@donacenter.com" },
-            { icon: MapPin, title: "Adresa", value: "Prishtinë, Kosovë" },
+            { icon: Phone, title: "Telefoni", value: "048 881 400", href: "tel:+38348881400" },
+            { icon: Mail, title: "Email", value: "donacenter16@gmail.com", href: "mailto:donacenter16@gmail.com" },
+            { icon: MapPin, title: "Butiku në Shtime", value: "Shtime, Rruga Tahir Sinani" },
+            { icon: MapPin, title: "Butiku në Ferizaj", value: "Ferizaj, Sheshi, Rruga Dëshmorët e Kombit" },
             { icon: Clock, title: "Orari", value: "E hënë - E shtunë: 9:00 - 20:00" },
           ].map(item => (
             <div key={item.title} className="flex items-start gap-4 p-5 rounded-2xl border border-gray-100">
