@@ -1,0 +1,156 @@
+import Link from "next/link"
+import { Mail, Phone, MapPin, ChevronRight } from "lucide-react"
+import { NewsletterForm } from "@/components/newsletter/NewsletterForm"
+
+// Brand icons were removed from lucide-react v1, so we use inline SVGs
+function FacebookIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  )
+}
+
+function InstagramIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  )
+}
+
+const FOOTER_LINKS = {
+  kategorite: {
+    title: "Kategoritë",
+    links: [
+      { label: "Gratë", href: "/women" },
+      { label: "Burrat", href: "/men" },
+      { label: "Të Rejat", href: "/new-arrivals" },
+      { label: "Më të Shitura", href: "/best-sellers" },
+    ],
+  },
+  ndihme: {
+    title: "Ndihmë",
+    links: [
+      { label: "Kontakt", href: "/contact" },
+      { label: "Gjurmo Porosinë", href: "/track-order" },
+      { label: "Rreth Nesh", href: "/about" },
+      { label: "Politika e Transportit", href: "/shipping-policy" },
+      { label: "Politika e Kthimit", href: "/return-policy" },
+      { label: "Pyetje të Shpeshta", href: "/contact" },
+    ],
+  },
+  ligjore: {
+    title: "Ligjore",
+    links: [
+      { label: "Politika e Privatësisë", href: "/privacy-policy" },
+      { label: "Politika e Cookies", href: "/privacy-policy#cookies" },
+      { label: "Kushtet dhe Rregullat", href: "/terms" },
+    ],
+  },
+}
+
+export default function Footer() {
+  return (
+    <footer className="bg-primary text-primary-foreground">
+      {/* Newsletter */}
+      <div className="border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl font-bold mb-2">Abonohu në buletinin tonë</h3>
+              <p className="text-white/70 text-sm">
+                Merr oferta ekskluzive dhe njoftime për produktet e reja para të gjithëve.
+              </p>
+            </div>
+            <NewsletterForm dark />
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-4 gap-10">
+          {/* Brand */}
+          <div className="md:col-span-1">
+            <Link href="/" className="text-2xl font-bold tracking-tight">
+              Dona<span className="text-white/70">Center</span>
+            </Link>
+            <p className="mt-4 text-sm text-white/70 leading-relaxed">
+              DonaCenter është butiku juaj premium për veshje moderne dhe elegante.
+              Cilësi e lartë, stil i përjetshëm.
+            </p>
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center gap-3 text-sm text-white/70">
+                <MapPin size={16} className="shrink-0" />
+                <span>Kosovë</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-white/70">
+                <Phone size={16} className="shrink-0" />
+                <span>+383 44 000 000</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-white/70">
+                <Mail size={16} className="shrink-0" />
+                <span>info@donacenter.com</span>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all" aria-label="Instagram">
+                <InstagramIcon />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all" aria-label="Facebook">
+                <FacebookIcon />
+              </a>
+            </div>
+          </div>
+
+          {/* Link Columns */}
+          {Object.values(FOOTER_LINKS).map((column) => (
+            <div key={column.title}>
+              <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">{column.title}</h4>
+              <ul className="space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1 group"
+                    >
+                      <ChevronRight size={12} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Shipping Info */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="grid sm:grid-cols-3 gap-6 text-center">
+            <div className="p-4 rounded-xl bg-white/5">
+              <p className="font-semibold text-sm">Kosovë</p>
+              <p className="text-white/60 text-xs mt-1">€2 transport • 48 orë</p>
+            </div>
+            <div className="p-4 rounded-xl bg-white/5">
+              <p className="font-semibold text-sm">Shqipëri</p>
+              <p className="text-white/60 text-xs mt-1">€6 transport • ~5 ditë</p>
+            </div>
+            <div className="p-4 rounded-xl bg-white/5">
+              <p className="font-semibold text-sm">Maqedonia e Veriut</p>
+              <p className="text-white/60 text-xs mt-1">€6 transport • ~6 ditë</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+          <p>&copy; {new Date().getFullYear()} DonaCenter. Të gjitha të drejtat e rezervuara.</p>
+          <p>Paguan me: Para në Dorëzim (Cash on Delivery)</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
