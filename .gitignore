@@ -42,3 +42,6 @@ yarn-error.log*
 next-env.d.ts
 .dona-*.js
 src/data/newsletter.json
+
+# Freebuff desktop tool data
+.freebuff/
