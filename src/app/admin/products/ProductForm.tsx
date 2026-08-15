@@ -197,12 +197,22 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image: dataUrl }),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || "Ngarkimi dështoi")
+      // Read as text first: if the platform returns a non-JSON error page
+      // (413/502), res.json() would throw a raw SyntaxError to the admin.
+      const text = await res.text()
+      let data: { url?: string; error?: string } = {}
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        // Non-JSON body — fall through with a clean generic error
+      }
+      if (!res.ok) throw new Error(data.error || "Ngarkimi i imazhit dështoi")
+      if (!data.url) throw new Error("Ngarkimi i imazhit dështoi")
+      const uploadedUrl = data.url
 
       setColors(prev =>
         prev.map((c, i) =>
-          i === colorIndex ? { ...c, images: [...c.images, data.url] } : c
+          i === colorIndex ? { ...c, images: [...c.images, uploadedUrl] } : c
         )
       )
     } catch (err: unknown) {

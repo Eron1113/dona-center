@@ -37,8 +37,12 @@ export async function POST(request: Request) {
         { status: 400 }
       )
     }
-    if (image.length > 5_500_000) {
-      return NextResponse.json({ error: "Imazhi është shumë i madh (max ~4MB)" }, { status: 400 })
+    // Vercel's serverless function body limit is 4.5MB, and base64 is ~33%
+    // larger than the raw bytes. Reject here BEFORE the request body could
+    // approach that limit, so the client gets our friendly 400 instead of a
+    // cryptic 413 from the platform. 4M base64 chars ≈ 3MB raw.
+    if (image.length > 4_000_000) {
+      return NextResponse.json({ error: "Imazhi është shumë i madh (max ~3MB)" }, { status: 400 })
     }
 
     const url = await uploadImage(image, "dona-center/products")
