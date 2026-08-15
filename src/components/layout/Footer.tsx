@@ -38,7 +38,7 @@ const FOOTER_LINKS = {
       { label: "Gjurmo Porosinë", href: "/track-order" },
       { label: "Rreth Nesh", href: "/about" },
       { label: "Politika e Transportit", href: "/shipping-policy" },
-      { label: "Politika e Kthimit", href: "/return-policy" },
+      { label: "Politika e Shkëmbimit", href: "/return-policy" },
       { label: "Pyetje të Shpeshta", href: "/contact" },
     ],
   },

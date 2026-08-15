@@ -45,7 +45,7 @@ export default function AboutPage() {
         {[
           { icon: Shield, title: "Cilësi Premium", desc: "Produkte 100% origjinale me materiale cilësore." },
           { icon: Truck, title: "Transport i Shpejtë", desc: "Dorëzim në 48 orë në Kosovë, 5-6 ditë rajon." },
-          { icon: Heart, title: "Shërbim i Dëgjueshëm", desc: "Mbështetje e shpejtë dhe kthime të lehta." },
+          { icon: Heart, title: "Shërbim i Dëgjueshëm", desc: "Mbështetje e shpejtë dhe shërbim personal në butik." },
         ].map(item => (
           <div key={item.title} className="p-6 rounded-2xl bg-gray-50 text-center">
             <item.icon className="mx-auto text-primary mb-3" size={28} />

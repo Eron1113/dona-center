@@ -140,7 +140,7 @@ export default async function HomePage() {
                 "KOLEKSIONI VERËS 2026",
                 "TRANSPORT I SHPEJTË 48 ORË",
                 "PAGESË NË DORËZIM",
-                "SHKËMBIM BREJDA 48 ORËVE",
+                "SHKËMBIM VETËM NË BUTIK",
                 "CILËSI 100% ORIGJINALE",
                 "POROSITI TANI",
               ].map((item, i) => (
@@ -161,7 +161,7 @@ export default async function HomePage() {
             {[
               { icon: Truck, title: "Transport i Shpejtë", desc: "48 orë në Kosovë" },
               { icon: Shield, title: "Cilësi Premium", desc: "Produkte 100% origjinale" },
-              { icon: RefreshCw, title: "Shkëmbim Madhësie", desc: "Brenda 48 orëve" },
+              { icon: RefreshCw, title: "Shkëmbim Madhësie", desc: "Vetëm në butik" },
               { icon: CreditCard, title: "Pagesë në Dorëzim", desc: "Para në dorëzim" },
             ].map((feature) => (
               <div key={feature.title} className="flex items-center gap-3">

@@ -1,41 +1,58 @@
 export const metadata = {
-  title: "Politika e Kthimit | DonaCenter",
-  description: "Rregullat e kthimit dhe shkëmbimit në DonaCenter.",
+  title: "Politika e Shkëmbimit | DonaCenter",
+  description: "Rregullat e shkëmbimit të madhësisë në DonaCenter - vetëm në butik.",
 }
 
 export default function ReturnPolicyPage() {
   return (
     <div className="container py-12 md:py-20 max-w-3xl">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">Politika e Kthimit dhe Shkëmbimit</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">Politika e Shkëmbimit</h1>
 
       <div className="space-y-6 text-gray-600 leading-relaxed">
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">Shkëmbimi i Madhësisë</h2>
           <p>
-            Nëse madhësia nuk ju përshtatet, keni të drejtë ta shkëmbeni produktin brenda{" "}
-            <strong>48 orëve</strong> nga marrja e porosisë, pa pagesë shtesë për transport
-            (për porositë në Kosovë).
+            Shkëmbimi i madhësisë bëhet <strong>vetëm personalisht në butik</strong>, jo me
+            postë apo transport. Nëse madhësia nuk ju përshtatet, keni të drejtë ta shkëmbeni
+            produktin brenda <strong>48 orëve</strong> nga marrja e porosisë, duke ardhur në
+            një nga butikët tanë në <strong>Shtime</strong> ose <strong>Ferizaj</strong>.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">Kushtet për Kthim</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">Kushtet për Shkëmbim</h2>
           <ul className="list-disc pl-5 space-y-2">
+            <li>Shkëmbimi pranohet vetëm brenda 48 orëve nga marrja e porosisë.</li>
+            <li>Duhet të vini personalisht në butik me produktin dhe faturën e porosisë.</li>
             <li>Produkti duhet të jetë i papërdorur, me etiketa dhe paketim origjinal.</li>
-            <li>Kthimet pranohen brenda 7 ditëve nga data e marrjes.</li>
-            <li>Produktet në shitje finale (me zbritje të madhe) mund të mos pranohen për kthim.</li>
-            <li>Kontaktoni në donacenter16@gmail.com përpara se të ktheni një produkt.</li>
+            <li>Produktet në shitje finale (me zbritje të madhe) mund të mos pranohen për shkëmbim.</li>
+            <li>Nuk kryejmë shkëmbime me postë apo nëpërmjet transportit.</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">Rimbursimet</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">Kthimet dhe Rimbursimet</h2>
           <p>
-            Meqenëse pagesa bëhet në dorëzim (Cash on Delivery), rimbursimet për produktet e
-            kthyera bëhen përmes transferit bankar ose duke u kompensuar me një porosi tjetër,
-            sipas preferencës së klientit. Pasi produkti të kthehet dhe të verifikohet,
-            rimbursimi përpunohet brenda 5-7 ditëve pune.
+            Kthimet dhe rimbursimet bëhen <strong>vetëm personalisht në butik</strong>, brenda
+            48 orëve nga marrja e porosisë dhe me faturën e porosisë. Nuk pranojmë kthime me
+            postë apo nëpërmjet transportit.
           </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">Ku të Na Gjeni</h2>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>
+              <strong>Butiku në Shtime</strong> — Rruga Tahir Sinani
+            </li>
+            <li>
+              <strong>Butiku në Ferizaj</strong> — Sheshi, Rruga Dëshmorët e Kombit
+            </li>
+            <li>
+              Për çdo pyetje, na kontaktoni në <strong>donacenter16@gmail.com</strong> ose në
+              telefon <strong>048 881 400</strong>.
+            </li>
+          </ul>
         </section>
       </div>
     </div>

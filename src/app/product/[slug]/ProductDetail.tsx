@@ -556,7 +556,7 @@ export function ProductDetail({ product }: { product: Product }) {
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
               <RefreshCw className="text-primary" size={22} />
-              <p className="text-xs text-gray-500 font-medium">Shkëmbim brenda 48 orëve</p>
+              <p className="text-xs text-gray-500 font-medium">Shkëmbim vetëm në butik</p>
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
               <Ruler className="text-primary" size={22} />
