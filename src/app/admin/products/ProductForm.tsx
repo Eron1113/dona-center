@@ -32,7 +32,6 @@ export function ProductForm({ product, categories }: ProductFormProps) {
 
   const [form, setForm] = useState({
     name: product?.name || "",
-    slug: product?.slug || "",
     description: product?.description || "",
     category: product?.category || categories[0]?.id || "",
     basePrice: product?.basePrice?.toString() || "",
@@ -79,9 +78,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   }
 
   // Live slug preview (what the product URL will be)
-  const slugPreview =
-    form.slug ||
-    form.name
+  const slugPreview = form.name
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -337,18 +334,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
               placeholder="Fustan Elegant"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="slug">Slug (lëre bosh për automatik)</Label>
-            <Input
-              id="slug"
-              value={form.slug}
-              onChange={e => update("slug", e.target.value)}
-              placeholder="fustan-elegant"
-            />
-            <p className="text-xs text-gray-400">
-              URL: /product/<span className="text-primary font-medium">{slugPreview || "..."}</span>
-            </p>
-          </div>
+
           <div className="space-y-2">
             <Label htmlFor="category">Kategoria *</Label>
             <select
