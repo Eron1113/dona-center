@@ -29,11 +29,12 @@ export async function notifyNewOrder(order: Order): Promise<void> {
   const smtpPass = process.env.SMTP_PASS
   const notifyEmail = process.env.NOTIFY_EMAIL
 
-  if (!telegramToken || !telegramChatId) {
-    if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !notifyEmail) {
-      // No channel configured — the order still saved, nothing to do.
-      return
-    }
+  const hasTelegram = Boolean(telegramToken && telegramChatId)
+  const hasEmail = Boolean(smtpHost && smtpPort && smtpUser && smtpPass && notifyEmail)
+
+  if (!hasTelegram && !hasEmail) {
+    // No channel configured — the order still saved, nothing to do.
+    return
   }
 
   const itemsText = order.items
@@ -66,7 +67,7 @@ export async function notifyNewOrder(order: Order): Promise<void> {
   ].join("\n")
 
   // Channel 1 — Telegram. Never break the order flow on failure.
-  if (telegramToken && telegramChatId) {
+  if (hasTelegram) {
     try {
       const res = await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
         method: "POST",
@@ -86,7 +87,7 @@ export async function notifyNewOrder(order: Order): Promise<void> {
   }
 
   // Channel 2 — Email. Never break the order flow on failure.
-  if (smtpHost && smtpPort && smtpUser && smtpPass && notifyEmail) {
+  if (hasEmail) {
     try {
       const transporter = nodemailer.createTransport({
         host: smtpHost,
