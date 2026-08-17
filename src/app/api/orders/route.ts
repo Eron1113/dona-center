@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
-import { saveOrder, getShippingInfo, getProducts, decrementStockForOrder } from "@/lib/data"
+import { saveOrder, getShippingInfo, getProducts, decrementStockForOrder, type Order } from "@/lib/data"
+import { notifyNewOrder } from "@/lib/notify"
 import { errorMessage } from "@/lib/utils"
 
 const cartItemSchema = z.object({
@@ -108,7 +109,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Totali nuk përputhet me rregullat e transportit" }, { status: 400 })
     }
 
-    await saveOrder({
+    const orderToSave: Order = {
       id: order.id,
       userId: order.userId || null,
       items: order.items,
@@ -126,7 +127,9 @@ export async function POST(request: Request) {
       paymentMethod: order.paymentMethod,
       status: "pending",
       createdAt: order.createdAt,
-    })
+    }
+
+    await saveOrder(orderToSave)
 
     // Decrement stock only AFTER the order is confirmed saved, so a failed
     // order never eats stock. If decrement fails, the order is still real.
@@ -135,6 +138,9 @@ export async function POST(request: Request) {
     } catch (err: unknown) {
       console.warn("Stock decrement failed for order", order.id, err instanceof Error ? err.message : err)
     }
+
+    // Notify the store owner (Telegram). Never blocks or fails the order.
+    await notifyNewOrder(orderToSave)
 
     return NextResponse.json({ ok: true, id: order.id }, { status: 201 })
   } catch (err: unknown) {

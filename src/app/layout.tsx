@@ -5,6 +5,7 @@ import "./globals.css"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import { CookieNotice } from "@/components/layout/CookieNotice"
+import WhatsAppButton from "@/components/layout/WhatsAppButton"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppButton />
         <CookieNotice />
         <Analytics />
       </body>
