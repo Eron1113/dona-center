@@ -117,6 +117,65 @@ html {
   animation-play-state: paused;
 }
 
+/* Ken Burns — slow cinematic zoom on the hero image */
+@keyframes kenburns {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.12) translateY(-1.5%); }
+}
+.animate-kenburns {
+  animation: kenburns 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Button shine sweep — light gliding across premium buttons */
+@keyframes shine {
+  0% { transform: translateX(-160%) skewX(-20deg); }
+  55%, 100% { transform: translateX(260%) skewX(-20deg); }
+}
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: shine 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Decorative blobs that drift slowly (hero background) */
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -22px) scale(1.08); }
+  66% { transform: translate(-22px, 18px) scale(0.94); }
+}
+.animate-blob {
+  animation: blob-drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+.animate-blob-delayed {
+  animation: blob-drift 16s ease-in-out 8s infinite;
+  will-change: transform;
+}
+
+
+/* Respect users who prefer reduced motion — kill infinite animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns,
+  .animate-blob,
+  .animate-blob-delayed,
+  .animate-marquee,
+  .animate-float,
+  .animate-float-delayed {
+    animation: none;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

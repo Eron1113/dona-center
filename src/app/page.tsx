@@ -3,6 +3,7 @@ import Image from "next/image"
 import { getFeaturedProducts, getCategories, getProducts } from "@/lib/data"
 import { HomeClient } from "./HomeClient"
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm"
+import { Reveal } from "@/components/ui/Reveal"
 import {
   ArrowRight,
   Truck,
@@ -32,10 +33,10 @@ export default async function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary rounded-full blur-3xl" />
+        {/* Background Pattern — drifting blobs */}
+        <div className="absolute inset-0 opacity-[0.05]">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl animate-blob" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary rounded-full blur-3xl animate-blob-delayed" />
         </div>
 
         <div className="container relative z-10">
@@ -63,7 +64,7 @@ export default async function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
                 <Link
                   href="/women"
-                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-all active:scale-[0.97] shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
+                  className="group btn-shine inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-all active:scale-[0.97] shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
                 >
                   Për Gratë
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -100,7 +101,7 @@ export default async function HomePage() {
                   src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200"
                   alt="Moda DonaCenter"
                   fill
-                  className="object-cover"
+                  className="object-cover animate-kenburns"
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
@@ -214,10 +215,14 @@ export default async function HomePage() {
                 title: "Paguaj në Dorëzim",
                 desc: "Porosia ju dërgohet shpejt dhe paguani vetëm kur e merrni në dorë. Asnjë parapagim!",
               },
-            ].map((item) => (
-              <div
+            ].map((item, index) => (
+              <Reveal
                 key={item.step}
-                className="group relative p-8 rounded-2xl border border-gray-100 bg-white hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
+                delay={index * 120}
+                className="h-full"
+              >
+              <div
+                className="group relative p-8 rounded-2xl border border-gray-100 bg-white hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 h-full"
               >
                 <span className="absolute top-6 right-8 text-5xl font-heading font-bold text-gray-100 group-hover:text-primary/10 transition-colors">
                   {item.step}
@@ -228,6 +233,7 @@ export default async function HomePage() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -274,7 +280,7 @@ export default async function HomePage() {
       {/* Featured Products */}
       <section className="py-20 md:py-28 bg-gray-50/50">
         <div className="container">
-          <div className="flex items-end justify-between mb-12">
+          <Reveal className="flex items-end justify-between mb-12">
             <div>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-3">Produktet e Veçuara</h2>
               <p className="text-gray-500">Zbuloni pjesët më të dashura të koleksionit tonë</p>
@@ -286,7 +292,7 @@ export default async function HomePage() {
               Shiko të gjitha
               <ArrowRight size={16} />
             </Link>
-          </div>
+          </Reveal>
 
           <HomeClient products={featuredProducts} />
         </div>
@@ -309,7 +315,7 @@ export default async function HomePage() {
               </p>
               <Link
                 href="/new-arrivals"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-xl hover:bg-white/90 transition-all active:scale-[0.97] shadow-xl"
+                className="btn-shine inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-xl hover:bg-white/90 transition-all active:scale-[0.97] shadow-xl"
               >
                 Shiko Të Rejat
                 <ArrowRight size={20} />
@@ -350,10 +356,10 @@ export default async function HomePage() {
                 city: "Shkup",
                 text: "Xhaketa që bleva është perfekte. DonaCenter ka stilin më të mirë në rajon — do të porosis sërish patjetër.",
               },
-            ].map((t) => (
+            ].map((t, index) => (
+              <Reveal key={t.name} delay={index * 120} className="h-full">
               <div
-                key={t.name}
-                className="relative p-8 rounded-2xl bg-gray-50 hover:bg-primary/[0.04] border border-transparent hover:border-primary/10 transition-all duration-300"
+                className="relative p-8 rounded-2xl bg-gray-50 hover:bg-primary/[0.04] border border-transparent hover:border-primary/10 transition-all duration-300 h-full"
               >
                 <Quote className="text-primary/20 mb-4" size={36} />
                 <div className="flex gap-1 mb-4">
@@ -374,6 +380,7 @@ export default async function HomePage() {
                   </div>
                 </div>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
