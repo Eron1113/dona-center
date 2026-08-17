@@ -60,23 +60,28 @@ export async function POST(request: Request) {
     const data = parsed.data
     const existing = data.id ? await getProductById(data.id) : undefined
 
-    // Slug is UNIQUE in the products table — check before upserting so a
-    // duplicate returns a clean 409 instead of a Postgres violation 500.
-    // Runs for creates (data.id is undefined) AND renames (self excluded
-    // by id), so editing a product's slug to one another product owns
-    // can't slip through to the DB.
-    const slugOwner = await getProductBySlug(data.slug)
-    if (slugOwner && slugOwner.id !== data.id) {
-      return NextResponse.json(
-        { error: "Ekziston tashmë një produkt me këtë slug. Ndrysho slug-in." },
-        { status: 409 }
-      )
+    // Slug is UNIQUE in the products table. The admin form no longer has a
+    // slug input (it's auto-generated from the name), so a collision with an
+    // existing product must be resolved automatically instead of failing:
+    // append a numeric suffix (fustan-elegant → fustan-elegant-2 → -3 …).
+    // Self is excluded by id, so editing a product keeps its own slug.
+    let slug = data.slug
+    const slugTakenByOther = async (s: string) => {
+      const owner = await getProductBySlug(s)
+      return Boolean(owner && owner.id !== data.id)
+    }
+    if (await slugTakenByOther(data.slug)) {
+      let n = 2
+      while (await slugTakenByOther(`${data.slug}-${n}`)) {
+        n++
+      }
+      slug = `${data.slug}-${n}`
     }
 
     const product = {
       id: data.id || crypto.randomUUID(),
       name: data.name,
-      slug: data.slug,
+      slug,
       description: data.description,
       category: data.category,
       tags: data.tags,
