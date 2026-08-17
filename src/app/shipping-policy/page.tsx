@@ -5,10 +5,13 @@ export const metadata = {
   description: "Rregullat e transportit dhe dorëzimit në DonaCenter.",
 }
 
+const LAST_UPDATED = "17 gusht 2026"
+
 export default function ShippingPolicyPage() {
   return (
     <div className="container py-12 md:py-20 max-w-3xl">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">Politika e Transportit</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-2">Politika e Transportit</h1>
+      <p className="text-sm text-gray-400 mb-8">Përditësuar: {LAST_UPDATED}</p>
 
       <div className="space-y-6 text-gray-600 leading-relaxed">
         <section>
