@@ -92,17 +92,19 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Hero Image */}
-            <div className="relative lg:h-[80vh] hidden lg:block animate-in fade-in duration-1000 delay-300">
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
-              <Image
-                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200"
-                alt="Moda DonaCenter"
-                fill
-                className="object-cover rounded-3xl"
-                priority
-                sizes="50vw"
-              />
+            {/* Hero Image — visible on mobile too (was hidden below lg) */}
+            <div className="relative lg:h-[80vh] animate-in fade-in duration-1000 delay-300">
+              <div className="relative aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
+                <Image
+                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200"
+                  alt="Moda DonaCenter"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
               {/* Floating Cards */}
               <div className="absolute bottom-8 left-8 z-20 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-xl animate-float">
                 <div className="flex items-center gap-3">
@@ -240,12 +242,13 @@ export default async function HomePage() {
               Eksploroni koleksionet tona të kuratuara për çdo stil dhe rast
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Horizontal swipe on mobile, grid on desktop */}
+          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:mx-0 sm:px-0 sm:overflow-visible sm:pb-0 sm:snap-none">
             {categories.map((category) => (
               <Link
                 key={category.id}
                 href={`/${category.slug}`}
-                className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-gray-100 shadow-sm hover:shadow-2xl hover:shadow-black/10 transition-shadow duration-500"
+                className="group relative w-[72vw] max-w-[280px] shrink-0 snap-start aspect-[4/5] overflow-hidden rounded-2xl bg-gray-100 shadow-sm hover:shadow-2xl hover:shadow-black/10 transition-shadow duration-500 sm:w-auto sm:max-w-none"
               >
                 <Image
                   src={category.image}
