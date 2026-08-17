@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import {
@@ -61,6 +61,10 @@ export function ProductDetail({ product }: { product: Product }) {
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false)
   const [isZoomed, setIsZoomed] = useState(false)
   const [deliveryCountry, setDeliveryCountry] = useState("Kosovë")
+  // Touch swipe start X for the mobile gallery
+  const touchStartX = useRef<number | null>(null)
+  // Set right after a swipe so the click that follows it doesn't toggle zoom
+  const swipedRef = useRef(false)
 
   const images =
     selectedColor?.images?.length
@@ -173,17 +177,40 @@ export function ProductDetail({ product }: { product: Product }) {
         {/* Gallery */}
         <div>
           <div
-            className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-50 group"
+            className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-50 group touch-pan-y"
             onMouseEnter={() => setIsZoomed(true)}
             onMouseLeave={() => setIsZoomed(false)}
-            onClick={() => setIsZoomed(z => !z)}
+            onTouchStart={e => {
+              touchStartX.current = e.touches[0]?.clientX ?? null
+            }}
+            onTouchEnd={e => {
+              if (touchStartX.current === null || images.length <= 1) return
+              const delta = e.changedTouches[0].clientX - touchStartX.current
+              touchStartX.current = null
+              if (Math.abs(delta) > 40) {
+                swipedRef.current = true
+                setActiveImage(prev =>
+                  (prev + (delta < 0 ? 1 : -1) + images.length) % images.length
+                )
+                setIsZoomed(false)
+              }
+            }}
+            onClick={() => {
+              if (swipedRef.current) {
+                swipedRef.current = false
+                return
+              }
+              setIsZoomed(z => !z)
+            }}
           >
+            {/* Crossfade on color/image change: keyed remount fades the new photo in */}
             <Image
+              key={images[activeImage] || images[0]}
               src={images[activeImage] || images[0]}
               alt={product.name}
               fill
               className={cn(
-                "object-cover transition-transform duration-500",
+                "object-cover transition-transform duration-500 animate-in fade-in duration-500",
                 isZoomed ? "scale-150 cursor-zoom-out" : "scale-100 cursor-zoom-in"
               )}
               priority
@@ -211,6 +238,23 @@ export function ProductDetail({ product }: { product: Product }) {
               <span className="absolute top-4 right-16 bg-black/50 text-white text-xs font-medium rounded-full px-3 py-1 backdrop-blur-sm">
                 {activeImage + 1} / {images.length}
               </span>
+            )}
+
+            {/* Progress dots — swipe position on mobile */}
+            {images.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+                {images.map((_, i) => (
+                  <span
+                    key={i}
+                    className={cn(
+                      "h-1.5 rounded-full transition-all duration-300",
+                      activeImage === i
+                        ? "w-6 bg-primary shadow-sm"
+                        : "w-1.5 bg-black/25"
+                    )}
+                  />
+                ))}
+              </div>
             )}
 
             <button

@@ -4,6 +4,7 @@ import { getFeaturedProducts, getCategories, getProducts } from "@/lib/data"
 import { HomeClient } from "./HomeClient"
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm"
 import { Reveal } from "@/components/ui/Reveal"
+import { WaveDivider } from "@/components/ui/WaveDivider"
 import {
   ArrowRight,
   Truck,
@@ -133,6 +134,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Wave into the marquee */}
+      <WaveDivider className="text-primary bg-gradient-to-br from-gray-50 via-white to-gray-100" />
 
       {/* Marquee Strip */}
       <div className="bg-primary text-primary-foreground py-3 overflow-hidden">
@@ -277,6 +281,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Wave into the featured section */}
+      <WaveDivider className="text-gray-50 bg-white" />
+
       {/* Featured Products */}
       <section className="py-20 md:py-28 bg-gray-50/50">
         <div className="container">
@@ -385,6 +392,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Wave into the newsletter section */}
+      <WaveDivider className="text-gray-50 bg-white" />
 
       {/* Newsletter */}
       <section className="py-20 bg-gray-50/50">
