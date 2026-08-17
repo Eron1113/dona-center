@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     locale: "sq_AL",
     siteName: "DonaCenter",
   },
+  verification: {
+    google: "zSerJQmFqTRad9Aa3PXERaGNbrBB2eRdyX-0i1SIVC8",
+  },
   robots: {
     index: true,
     follow: true,
