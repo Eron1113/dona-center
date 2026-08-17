@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Heart, Eye, Star, ArrowRight } from "lucide-react"
@@ -24,6 +24,22 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  // 3D tilt — subtle perspective rotation following the pointer (desktop only)
+  const tiltRef = useRef<HTMLDivElement>(null)
+
+  const handleTiltMove = (e: React.MouseEvent) => {
+    const el = tiltRef.current
+    if (!el || window.matchMedia("(hover: none)").matches) return
+    const rect = el.getBoundingClientRect()
+    const px = (e.clientX - rect.left) / rect.width - 0.5
+    const py = (e.clientY - rect.top) / rect.height - 0.5
+    el.style.transform = `perspective(900px) rotateY(${px * 7}deg) rotateX(${-py * 7}deg)`
+  }
+
+  const handleTiltLeave = () => {
+    const el = tiltRef.current
+    if (el) el.style.transform = ""
+  }
 
   useEffect(() => {
     const wishlist = JSON.parse(localStorage.getItem("dona-center-wishlist") || "[]")
@@ -65,8 +81,14 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   return (
     <>
       <div className="group relative">
-        {/* Image Container */}
-        <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden rounded-xl bg-gray-50">
+        {/* Image Container — 3D tilt wrapper */}
+        <div
+          ref={tiltRef}
+          onMouseMove={handleTiltMove}
+          onMouseLeave={handleTiltLeave}
+          className="transition-transform duration-300 ease-out [transform-style:preserve-3d]"
+        >
+        <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden rounded-xl bg-gray-50 shadow-sm group-hover:shadow-xl group-hover:shadow-primary/10 transition-shadow duration-500">
           {/* Image */}
           <div className="relative w-full h-full">
             <Image
@@ -145,6 +167,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             </button>
           </div>
         </Link>
+        </div>
 
         {/* Product Info */}
         <Link href={`/product/${product.slug}`} className="block mt-4 space-y-2">

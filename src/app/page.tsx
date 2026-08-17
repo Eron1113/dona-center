@@ -5,6 +5,8 @@ import { HomeClient } from "./HomeClient"
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm"
 import { Reveal } from "@/components/ui/Reveal"
 import { WaveDivider } from "@/components/ui/WaveDivider"
+import { HeroSlideshow } from "@/components/home/HeroSlideshow"
+import { Counter } from "@/components/ui/Counter"
 import {
   ArrowRight,
   Truck,
@@ -82,12 +84,14 @@ export default async function HomePage() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-100 animate-in fade-in duration-700 delay-500">
                 {[
-                  { value: `${productCount}+`, label: "Produkte" },
-                  { value: "3", label: "Vende Transporti" },
-                  { value: "98%", label: "Kënaqësi" },
+                  { to: productCount, suffix: "+", label: "Produkte" },
+                  { to: 3, suffix: "", label: "Vende Transporti" },
+                  { to: 98, suffix: "%", label: "Kënaqësi" },
                 ].map((stat) => (
                   <div key={stat.label}>
-                    <p className="text-2xl sm:text-3xl font-bold text-primary">{stat.value}</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-primary">
+                      <Counter to={stat.to} suffix={stat.suffix} />
+                    </p>
                     <p className="text-sm text-gray-400 mt-1">{stat.label}</p>
                   </div>
                 ))}
@@ -98,14 +102,7 @@ export default async function HomePage() {
             <div className="relative lg:h-[80vh] animate-in fade-in duration-1000 delay-300">
               <div className="relative aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
-                <Image
-                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200"
-                  alt="Moda DonaCenter"
-                  fill
-                  className="object-cover animate-kenburns"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+                <HeroSlideshow />
               </div>
               {/* Floating Cards */}
               <div className="absolute bottom-8 left-8 z-20 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-xl animate-float">

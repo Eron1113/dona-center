@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import { CookieNotice } from "@/components/layout/CookieNotice"
 import WhatsAppButton from "@/components/layout/WhatsAppButton"
+import { ScrollProgress } from "@/components/ui/ScrollProgress"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-sans">
+        <ScrollProgress />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

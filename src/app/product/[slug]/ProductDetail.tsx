@@ -15,7 +15,6 @@ import {
   Check,
   Ruler,
   ZoomIn,
-  X,
   ChevronLeft,
   ChevronRight,
   Shirt,
@@ -24,6 +23,7 @@ import {
   Thermometer,
   Scissors,
   Info,
+  CreditCard,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -34,22 +34,6 @@ import { getCareInfo } from "@/lib/care"
 
 const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800"
 
-const SIZE_GUIDE: { size: string; chest: string; waist: string; hips: string }[] = [
-  { size: "XS", chest: "81-86 cm", waist: "66-71 cm", hips: "81-86 cm" },
-  { size: "S", chest: "86-91 cm", waist: "71-76 cm", hips: "86-91 cm" },
-  { size: "M", chest: "96-101 cm", waist: "81-86 cm", hips: "96-101 cm" },
-  { size: "L", chest: "106-111 cm", waist: "91-96 cm", hips: "106-111 cm" },
-  { size: "XL", chest: "116-121 cm", waist: "101-106 cm", hips: "116-121 cm" },
-  { size: "XXL", chest: "126-131 cm", waist: "111-116 cm", hips: "126-131 cm" },
-]
-
-// Show only the guide rows for sizes this product actually has. Custom
-// size names (shoes: 36–45, or "One Size") simply don't appear in the
-// table — the modal falls back to a generic note in that case.
-function buildSizeGuideRows(sizes: string[]) {
-  return SIZE_GUIDE.filter(row => sizes.includes(row.size))
-}
-
 export function ProductDetail({ product }: { product: Product }) {
   const router = useRouter()
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
@@ -58,7 +42,6 @@ export function ProductDetail({ product }: { product: Product }) {
   const [addedToCart, setAddedToCart] = useState(false)
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [activeImage, setActiveImage] = useState(0)
-  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false)
   const [isZoomed, setIsZoomed] = useState(false)
   const [deliveryCountry, setDeliveryCountry] = useState("Kosovë")
   // Touch swipe start X for the mobile gallery
@@ -410,17 +393,9 @@ export function ProductDetail({ product }: { product: Product }) {
           {/* Sizes */}
           {product.sizes.length > 0 ? (
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-sm font-medium text-gray-900">
-                  Madhësia: <span className="text-gray-500">{selectedSize}</span>
-                </p>
-                <button
-                  onClick={() => setIsSizeGuideOpen(true)}
-                  className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium"
-                >
-                  <Ruler size={16} /> Udhëzuesi i madhësive
-                </button>
-              </div>
+              <p className="text-sm font-medium text-gray-900 mb-3">
+                Madhësia: <span className="text-gray-500">{selectedSize}</span>
+              </p>
               <div className="flex flex-wrap gap-2">
                 {product.sizes.map(size => {
                   const stock = product.stock[selectedColor.name]?.[size] || 0
@@ -603,68 +578,12 @@ export function ProductDetail({ product }: { product: Product }) {
               <p className="text-xs text-gray-500 font-medium">Shkëmbim vetëm në butik</p>
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
-              <Ruler className="text-primary" size={22} />
-              <p className="text-xs text-gray-500 font-medium">Udhëzues madhësish</p>
+              <CreditCard className="text-primary" size={22} />
+              <p className="text-xs text-gray-500 font-medium">Pagesë në dorëzim</p>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Size Guide Modal */}
-      {isSizeGuideOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => setIsSizeGuideOpen(false)}
-          />
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 animate-in zoom-in-95 duration-300">
-            <button
-              onClick={() => setIsSizeGuideOpen(false)}
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all"
-              aria-label="Mbyll"
-            >
-              <X size={20} />
-            </button>
-            <h3 className="text-xl font-bold text-gray-900 mb-1">Udhëzuesi i madhësive</h3>
-            <p className="text-sm text-gray-500 mb-5">
-              Matjet në centimetra. Zgjidhni madhësinë sipas trupit tuaj.
-            </p>
-            {buildSizeGuideRows(product.sizes).length > 0 ? (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="text-left text-gray-400 border-b border-gray-100">
-                      <th className="pb-3 font-medium">Madhësia</th>
-                      <th className="pb-3 font-medium">Gjoksi</th>
-                      <th className="pb-3 font-medium">Bel</th>
-                      <th className="pb-3 font-medium">Ijet</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {buildSizeGuideRows(product.sizes).map(row => (
-                      <tr key={row.size} className="border-b border-gray-50">
-                        <td className="py-3 font-semibold text-gray-900">{row.size}</td>
-                        <td className="py-3 text-gray-600">{row.chest}</td>
-                        <td className="py-3 text-gray-600">{row.waist}</td>
-                        <td className="py-3 text-gray-600">{row.hips}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div className="bg-gray-50 rounded-xl p-4 text-sm text-gray-600">
-                Ky produkt përdor madhësi të veçanta (
-                <span className="font-semibold text-gray-900">{product.sizes.join(", ")}</span>).
-                Nëse keni dyshime për madhësinë, kontaktoni ne dhe do t&apos;ju ndihmojmë.
-              </div>
-            )}
-            <p className="text-xs text-gray-400 mt-4">
-              💡 Nëse jeni mes dy madhësive, rekomandojmë të zgjidhni madhësinë më të madhe.
-            </p>
-          </div>
-        </div>
-      )}
     </>
   )
 }
