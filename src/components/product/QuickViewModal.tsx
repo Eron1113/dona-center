@@ -102,7 +102,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
           <div className="p-6 md:p-8">
             {/* Category */}
             <p className="text-xs uppercase tracking-widest text-gray-400 mb-2">
-              {product.category === "women" ? "Gratë" : "Burrat"}
+              Koleksioni
             </p>
 
             {/* Title */}

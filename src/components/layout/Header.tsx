@@ -9,8 +9,7 @@ import { cn } from "@/lib/utils"
 import type { CartItem } from "@/lib/data"
 
 const NAV_ITEMS = [
-  { label: "Gratë", href: "/women" },
-  { label: "Burrat", href: "/men" },
+  { label: "Koleksioni", href: "/women" },
   { label: "Të Rejat", href: "/new-arrivals" },
   { label: "Më të Shitura", href: "/best-sellers" },
 ]

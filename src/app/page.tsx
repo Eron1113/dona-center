@@ -35,7 +35,7 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
+      <section className="relative min-h-[92vh] flex items-center bg-gradient-to-br from-gray-50 via-white to-primary/[0.03] overflow-hidden">
         {/* Background Pattern — drifting blobs */}
         <div className="absolute inset-0 opacity-[0.05]">
           <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl animate-blob" />
@@ -43,9 +43,9 @@ export default async function HomePage() {
         </div>
 
         <div className="container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
             {/* Text Content */}
-            <div className="space-y-8 pt-20 lg:pt-0">
+            <div className="space-y-8 pt-20 lg:pt-0 lg:pl-4">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 rounded-full text-sm text-primary font-medium animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 Koleksioni Verës 2026
@@ -69,14 +69,14 @@ export default async function HomePage() {
                   href="/women"
                   className="group btn-shine inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-all active:scale-[0.97] shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
                 >
-                  Për Gratë
+                  Shiko Koleksionin
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
-                  href="/men"
+                  href="/new-arrivals"
                   className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl border-2 border-gray-200 hover:border-primary/30 hover:bg-gray-50 transition-all active:scale-[0.97]"
                 >
-                  Për Burrat
+                  Të Rejat
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -98,9 +98,9 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Hero Image — visible on mobile too (was hidden below lg) */}
+            {/* Hero Image */}
             <div className="relative lg:h-[80vh] animate-in fade-in duration-1000 delay-300">
-              <div className="relative aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden">
+              <div className="relative aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden shadow-2xl shadow-black/10">
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
                 <HeroSlideshow />
               </div>
@@ -160,7 +160,7 @@ export default async function HomePage() {
 
       {/* Features Bar */}
       <section className="border-y border-gray-100 bg-white">
-        <div className="container py-6">
+        <div className="container py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { icon: Truck, title: "Transport i Shpejtë", desc: "48 orë në Kosovë" },
@@ -169,11 +169,11 @@ export default async function HomePage() {
               { icon: CreditCard, title: "Pagesë në Dorëzim", desc: "Para në dorëzim" },
             ].map((feature) => (
               <div key={feature.title} className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary/5 rounded-lg flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 bg-primary/[0.07] rounded-xl flex items-center justify-center shrink-0">
                   <feature.icon className="text-primary" size={20} />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">{feature.title}</p>
+                  <p className="font-semibold text-sm text-gray-900">{feature.title}</p>
                   <p className="text-xs text-gray-400">{feature.desc}</p>
                 </div>
               </div>
@@ -183,20 +183,20 @@ export default async function HomePage() {
       </section>
 
       {/* How to Order */}
-      <section className="py-20 md:py-28">
+      <section className="py-24 md:py-32">
         <div className="container">
-          <div className="text-center mb-12">
-            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-3">
               Proces i thjeshtë
             </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Si të Porosisësh
             </h2>
             <p className="text-gray-500 max-w-md mx-auto">
               Tre hapa të thjeshtë dhe moda juaj e re është në derën tuaj
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: ShoppingBag,
@@ -223,9 +223,9 @@ export default async function HomePage() {
                 className="h-full"
               >
               <div
-                className="group relative p-8 rounded-2xl border border-gray-100 bg-white hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 h-full"
+                className="group relative p-8 rounded-2xl border border-gray-100/80 bg-white hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.06] transition-all duration-300 h-full"
               >
-                <span className="absolute top-6 right-8 text-5xl font-heading font-bold text-gray-100 group-hover:text-primary/10 transition-colors">
+                <span className="absolute top-6 right-8 text-5xl font-heading font-bold text-gray-100/80 group-hover:text-primary/[0.08] transition-colors">
                   {item.step}
                 </span>
                 <div className="w-14 h-14 bg-primary/5 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
@@ -241,10 +241,11 @@ export default async function HomePage() {
       </section>
 
       {/* Categories */}
-      <section className="py-20 md:py-28">
+      <section className="py-24 md:py-32">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-3">Kategoritë</h2>
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-3">Eksploroni</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Kategoritë</h2>
             <p className="text-gray-500 max-w-md mx-auto">
               Eksploroni koleksionet tona të kuratuara për çdo stil dhe rast
             </p>
@@ -282,9 +283,9 @@ export default async function HomePage() {
       <WaveDivider className="text-gray-50 bg-white" />
 
       {/* Featured Products */}
-      <section className="py-20 md:py-28 bg-gray-50/50">
+      <section className="py-24 md:py-32 bg-gray-50/50">
         <div className="container">
-          <Reveal className="flex items-end justify-between mb-12">
+          <Reveal className="flex items-end justify-between mb-14">
             <div>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-3">Produktet e Veçuara</h2>
               <p className="text-gray-500">Zbuloni pjesët më të dashura të koleksionit tonë</p>
@@ -303,18 +304,18 @@ export default async function HomePage() {
       </section>
 
       {/* Banner Section */}
-      <section className="py-20 md:py-28">
+      <section className="py-24 md:py-32">
         <div className="container">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-primary via-primary/95 to-primary">
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary via-primary to-primary/90">
             <div className="absolute inset-0 opacity-10">
               <div className="absolute top-10 left-10 w-40 h-40 border-2 border-white rounded-full" />
               <div className="absolute bottom-10 right-20 w-60 h-60 border-2 border-white rounded-full" />
             </div>
-            <div className="relative z-10 px-8 py-16 md:py-20 md:px-16 text-center text-primary-foreground">
-              <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
+            <div className="relative z-10 px-8 py-20 md:py-24 md:px-16 text-center text-primary-foreground">
+              <h2 className="font-heading text-3xl md:text-5xl font-bold mb-5">
                 Koleksioni Verës 2026
               </h2>
-              <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-8">
+              <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-8">
                 Stili i ri ka mbërritur. Zbuloni pjesët më të reja të koleksionit tonë ekskluziv të verës.
               </p>
               <Link
@@ -330,13 +331,13 @@ export default async function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 md:py-28">
+      <section className="py-24 md:py-32">
         <div className="container">
-          <div className="text-center mb-12">
-            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-3">
               Fjalët e klientëve
             </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Çfarë Thonë Klientët
             </h2>
             <p className="text-gray-500 max-w-md mx-auto">
@@ -363,7 +364,7 @@ export default async function HomePage() {
             ].map((t, index) => (
               <Reveal key={t.name} delay={index * 120} className="h-full">
               <div
-                className="relative p-8 rounded-2xl bg-gray-50 hover:bg-primary/[0.04] border border-transparent hover:border-primary/10 transition-all duration-300 h-full"
+                className="relative p-8 rounded-2xl bg-gray-50 hover:bg-primary/[0.03] border border-transparent hover:border-primary/[0.08] transition-all duration-300 h-full"
               >
                 <Quote className="text-primary/20 mb-4" size={36} />
                 <div className="flex gap-1 mb-4">
@@ -394,7 +395,7 @@ export default async function HomePage() {
       <WaveDivider className="text-gray-50 bg-white" />
 
       {/* Newsletter */}
-      <section className="py-20 bg-gray-50/50">
+      <section className="py-24 bg-gray-50/50">
         <div className="container">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-3">

@@ -10,8 +10,7 @@ import type { Product } from "@/lib/data"
 import { QuickViewModal } from "./QuickViewModal"
 
 const CATEGORY_LABELS: Record<string, string> = {
-  women: "Gratë",
-  men: "Burrat",
+  women: "Koleksioni",
 }
 
 interface ProductCardProps {

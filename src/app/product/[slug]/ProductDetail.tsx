@@ -318,7 +318,7 @@ export function ProductDetail({ product }: { product: Product }) {
         <div className="space-y-6">
           <div>
             <p className="text-xs uppercase tracking-widest text-gray-400 mb-2">
-              {product.category === "women" ? "Gratë" : "Burrat"}
+              Koleksioni
             </p>
             <h1 className="font-heading text-3xl md:text-4xl font-bold text-gray-900">{product.name}</h1>
             <div className="flex items-center gap-2 mt-3">
